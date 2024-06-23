@@ -1,0 +1,65 @@
+﻿@page
+@model LoginWith2faModel
+@{
+    ViewData["Title"] = "Two-factor Authentication for Login";
+}
+
+<style>
+    .center-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 400px;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    .btn-red-orange {
+        background-color: #FF4500;
+        border-color: #FF4500;
+        color: white;
+    }
+
+        .btn-red-orange:hover {
+            background-color: #FF6347;
+            border-color: #FF6347;
+        }
+
+    h1 {
+        color: black;
+    }
+</style>
+
+<div class="center-content">
+    <h1>@ViewData["Title"]</h1>
+    <hr />
+    <p>Almost there! Please enter the 2FA code below to access your account.</p>
+    <div class="form-container">
+        <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
+            <input asp-for="RememberMe" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
+                <label asp-for="Input.TwoFactorCode" class="form-label"></label>
+                <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
+            </div>
+            <div>
+                <button type="submit" class="w-100 btn btn-lg btn-red-orange">Log in</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

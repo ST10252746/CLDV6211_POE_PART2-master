@@ -1,0 +1,104 @@
+﻿@model ST10242546_CLDV6211_POE_.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <h1 class="text-center">Edit</h1>
+
+    <h4 class="text-center">Product</h4>
+    <hr />
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProductId" />
+
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label asp-for="Name" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label asp-for="ProductDescription" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input asp-for="ProductDescription" class="form-control" />
+                        <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label asp-for="Price" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label asp-for="Category" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <select asp-for="Category" class="form-control">
+                            <option value="Wooden Work">Wooden Work</option>
+                            <option value="Metal Work">Metal Work</option>
+                            <option value="Woven Work">Woven Work</option>
+                            <option value="Glass Work">Glass Work</option>
+                            <option value="Beaded Work">Beaded Work</option>
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label asp-for="Availability" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <select asp-for="Availability" class="form-control">
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
+                        <span asp-validation-for="Availability" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label asp-for="ImageUrlpath" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input asp-for="ImageUrlpath" class="form-control" />
+                        <span asp-validation-for="ImageUrlpath" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn" style="background-color: #ff4500; color: white;">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

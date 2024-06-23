@@ -1,0 +1,100 @@
+﻿@Model IEnumerable<ST10242546_CLDV6211_POE_.Models.OrderHistoryViewModel>
+@{
+    ViewData["Title"] = "Order History";
+}
+<div class="container-products">
+<h2>Order History</h2>
+
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Order Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.OrderDate</td>
+                <td>@order.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+<style>
+body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa; /* Light gray background color */
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-products {
+        width: 80%;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+        .btn-primary {
+            background-color: orangered; /* Orange */
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #F5DEB3;
+            border-color: #895d35 !important;
+            color: #895d35;
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+</style>

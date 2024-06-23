@@ -1,0 +1,201 @@
+﻿@model IEnumerable<ST10242546_CLDV6211_POE_.Models.Product>
+
+@{
+    ViewData["Title"] = "My Work Page";
+}
+
+<section class="slick-slideshow">
+    <div class="slick-custom">
+        <img src="~/images/my-work-header.jpg" class="img-fluid" alt="">
+        <div class="slick-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-10">
+                        <h1 class="slick-title text-primary">Our</h1>
+                        <h1 class="slick-title white-text">Gallery</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slick-custom">
+        <img src="~/images/my-work-header.jpg" class="img-fluid" alt="">
+        <div class="slick-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="white-text bold-text larger-text text-center">
+                        Welcome to our gallery, where every piece tells a story.
+                    </p>
+                    <p class="white-text bold-text larger-text text-center">
+                        Dive into a world of vibrant colors, intricate patterns,
+                    </p>
+                    <p class="white-text bold-text larger-text text-center">
+                        and timeless beauty as you browse through our diverse collection of handmade art.
+                    </p>
+                    <p class="white-text bold-text larger-text text-center">
+                        From handwoven baskets to hand-carved sculptures, each piece reflects the rich cultural tapestry of Africa.
+                    </p>
+                    <p class="white-text bold-text larger-text text-center">
+                        Whether you're drawn to the warmth of traditional textiles or the boldness of contemporary designs,
+                    </p>
+                    <p class="white-text bold-text larger-text text-center">
+                        there's something here to inspire and delight every art lover.
+                    </p>
+                </div>
+                <div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .black-text {
+        color: black;
+    }
+
+    .white-text {
+        color: white;
+    }
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    .larger-text {
+        font-size: 1.1rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .subheading {
+        color: grey;
+
+    }
+
+    .btn-red-orange {
+        background-color: #FF4500;
+        color: white;
+        border-color: #FF4500;
+    }
+
+        .btn-red-orange:hover {
+            background-color: #FF6347;
+            border-color: #FF6347;
+        }
+</style>
+<div class="filter-container">
+<p>Filter By Category:</p>
+     @using (Html.BeginForm("Index", "MyWork", FormMethod.Get))
+     {
+<div class="form-group">
+             @Html.DropDownList("category", ViewBag.Category as SelectList, "All Categories", new { @class = "form-control" })
+</div>
+ <button type="submit" class="btn btn-red-orange">Filter</button>
+     }
+</div>
+
+<section class="products section-padding">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-5">Explore Our Art Pieces</h2>
+            </div>
+
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-4 col-12 mb-3">
+                    <div class="product-thumb">
+                        <a href="#">
+                            <img src="@product.ImageUrlpath" class="img-fluid product-image" alt="@product.Name">
+                        </a>
+
+                        <div class="product-top d-flex">
+                            @if (product.Availability == true)
+                            {
+                                <span class="product-alert me-auto" style="background-color: darkgreen; color: white;">In Stock</span>
+                            }
+                            else
+                            {
+                                <span class="product-alert me-auto" style="background-color: darkred; color: white;">Out of Stock</span>
+                            }
+                        </div>
+
+                        <div class="product-info d-flex">
+                            <div>
+                                <h5 class="product-title mb-0">
+                                    <a class="product-title-link">@product.Name</a>
+                                </h5>
+                                <h6 class="subheading">@product.Category</h6>
+                                <p class="product-p">@product.ProductDescription</p>
+                            </div>
+
+                            <small class="product-price text-muted ms-auto">R@(product.Price?.ToString("0.00"))</small>
+                            <div class="add-to-cart-icon" data-product-id="@product.ProductId" style="top: 136px; position: relative;">
+                                <!-- "Add to Cart - adds to orderRequests" icon here -->
+                                <i class="fa fa-cart-plus"></i>
+                            </div>
+                        </div>
+       </div>
+                </div>
+            }
+        </div>
+        <div style="text-align: center;">
+            <a href="@Url.Action("Cart", "MyWork")" class="btn btn-primary" style="background-color: orangered; border-color: orangered;">
+                <i class="fa fa-shopping-cart"></i> View Shopping Cart
+            </a>
+        </div>
+    </div>
+    <!-- All images depicted within all PAGES are adapted from Pinterest (https://za.pinterest.com/) -->
+    <!-- All PAGES are edited but layout depicted from Tooplate Template (https://www.tooplate.com/) -->
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.add-to-cart-icon').on('click', function () {
+                    var productId = $(this).data('product-id');
+
+                    // Check product availability
+                    $.ajax({
+                        url: '@Url.Action("CheckProductAvailability", "MyWork")',
+                        type: 'POST',
+                        data: { productId: productId },
+                        success: function (response) {
+                            if (response.success) {
+                                // If product is available, proceed to add to cart
+                                $.ajax({
+                                    url: '@Url.Action("CreateOrder", "MyWork")',
+                                    type: 'POST',
+                                    data: { productId: productId },
+                                    success: function (response) {
+                                        if (response.success) {
+                                            alert('Product added to cart successfully.');
+                                        } else {
+                                            alert('Failed to add product to cart.');
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        alert('Error adding product to cart: ' + xhr.responseText);
+                                    }
+                                });
+                            } else {
+                                // Product is not available
+                                alert(response.message);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert('Error checking product availability: ' + xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+    }
+    
+</section>

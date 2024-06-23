@@ -1,0 +1,74 @@
+﻿@model ST10242546_CLDV6211_POE_.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container text-center">
+    <!-- Centered container -->
+    <h1>Create</h1>
+
+    <h4>Product</h4>
+    <hr />
+    <div class="row justify-content-center">
+        <!-- Centered row -->
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductDescription" class="control-label"></label>
+                    <input asp-for="ProductDescription" class="form-control" />
+                    <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label"></label>
+                    <select asp-for="Category" class="form-control">
+                        <option value="Wooden Work">Wooden Work</option>
+                        <option value="Metal Work">Metal Work</option>
+                        <option value="Woven Work">Woven Work</option>
+                        <option value="Glass Work">Glass Work</option>
+                        <option value="Beaded Work">Beaded Work</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Availability" class="control-label"></label>
+                    <select asp-for="Availability" class="form-control">
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                    <span asp-validation-for="Availability" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImageUrlpath" class="control-label"></label>
+                    <input asp-for="ImageUrlpath" class="form-control" />
+                    <span asp-validation-for="ImageUrlpath" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" style="background-color: orangered; color: white; border-color: orangered;" /> <!-- Orange-red button with outlined border -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index" style="text-decoration: underline;">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
